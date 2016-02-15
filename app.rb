@@ -46,9 +46,9 @@ class HangpersonApp < Sinatra::Base
       end
     rescue ArgumentError
       flash[:message] = "Invalid guess."
+    ensure
       redirect '/show'
     end
-    redirect '/show'
   end
   
   # Everytime a guess is made, we should eventually end up at this route.
@@ -67,6 +67,7 @@ class HangpersonApp < Sinatra::Base
   
   get '/win' do
     ### YOUR CODE HERE ###
+    unless @game.check_win_or_lose == :win then redirect '/lose' end # THAT'S WHAT YOU GET
     erb :win # You may change/remove this line
   end
   
